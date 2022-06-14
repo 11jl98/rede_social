@@ -15,17 +15,16 @@ const statusBarHeight = StatusBar.currentHeight
   ? StatusBar.currentHeight + 90
   : 64;
 
-export default function dataProfile({ data }) {
+export default function dataProfile() {
 
-  const { GetAvatarUser, avatarUser, GetUser, user } = useContext(ContextUsers)
+  const { GetUser, user } = useContext(ContextUsers)
   const { countFollowers, followers, followings } = useContext(ContextFollowers)
   const { PostsCountUser , postsCount } = useContext(ContextPosts)
 
   useEffect(()=>{
-    GetUser()
-    GetAvatarUser()
     countFollowers()
     PostsCountUser()
+    GetUser()
   },[])
 
   return (
@@ -33,7 +32,7 @@ export default function dataProfile({ data }) {
       <View style={styles.content}>
         <Image
           source={{
-            uri: `data:image/jpeg;base64,${avatarUser}`,
+            uri: user.avatar_url,
           }}
           style={styles.userAvatar}
         />
@@ -42,11 +41,11 @@ export default function dataProfile({ data }) {
           <Text>Posts</Text>
         </View>
         <View style={styles.contentDataPosts}>
-          <Text style={styles.numberPosts}>{followers}</Text>
+          <Text style={styles.numberPosts}>{followings}</Text>
           <Text>Seguidores</Text>
         </View>
         <View style={styles.contentDataPosts}>
-          <Text style={styles.numberPosts}>{followings}</Text>
+          <Text style={styles.numberPosts}>{followers}</Text>
           <Text>Seguindo</Text>
         </View>
       </View>
@@ -57,7 +56,7 @@ export default function dataProfile({ data }) {
         <Text style={styles.description}>{user.description}</Text>
       </View>
       <View style={styles.content}>
-        <TouchableOpacity style={styles.buttonEdit} onPress={()=> console.log(postsCount)}>
+        <TouchableOpacity style={styles.buttonEdit} onPress={countFollowers}>
           <Text style={{ fontSize:12 }}>Editar Perfil</Text>
         </TouchableOpacity>
       </View>

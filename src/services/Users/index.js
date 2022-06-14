@@ -12,4 +12,9 @@ async function getAvatarUser() {
   return base64
 }
 
-export { getUser,  getAvatarUser };
+async function getUserSearch(queryParams){
+  const { data } = await http.get(`/users/search?q=${queryParams}`)
+  return data
+}
+
+export { getUser,  getAvatarUser, getUserSearch };

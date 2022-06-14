@@ -4,10 +4,10 @@ import Followers from "./hooks/FollowersInFollowing"
 const ContextFollowers = createContext()
 
 function FollowersProvider({children}){
-    const { countFollowers, followers, followings }  = Followers()
+    const { countFollowers, followers, followings, followersSave, idFll, followersDelete }  = Followers()
 
     return(
-        <ContextFollowers.Provider value={{countFollowers, followers, followings}}>
+        <ContextFollowers.Provider value={{countFollowers, followers, followings, followersSave, idFll, followersDelete}}>
             {children}
         </ContextFollowers.Provider>
     )

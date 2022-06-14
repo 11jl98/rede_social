@@ -1,12 +1,13 @@
-import { View } from "react-native";
 import { Search } from "../../components/Search";
+import { UsersProvider } from "../../context/UsersContext";
+import { FollowersProvider } from "../../context/FollowersInFollowingContext";
 
 export default function SearchUser() {
-
   return (
-
-    <View>
-     <Search/>
-    </View>
+    <UsersProvider>
+      <FollowersProvider>
+        <Search />
+      </FollowersProvider>
+    </UsersProvider>
   );
 }

@@ -11,3 +11,6 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+
+//10.0.0.102

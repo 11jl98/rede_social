@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-import { getUser, getAvatarUser } from "../../services/Users";
+import { useState, useEffect, useCallback } from "react";
+import { getUser, getUserSearch } from "../../services/Users";
+import { getFollowers } from '../../services/FollowersInFollowing'
 
 export default function UseSingIn() {
   const entityUser = {
@@ -12,7 +13,7 @@ export default function UseSingIn() {
     password: "",
   };
   const [user, setUser] = useState(entityUser);
-  const [avatarUser, setavatarUser] = useState(null);
+  const [usersSearch, setUsersSearch] = useState([]);
 
   async function GetUser() {
     try {
@@ -22,14 +23,22 @@ export default function UseSingIn() {
     }
   }
 
-  async function GetAvatarUser(){
+  async function searchUser(queryParams){
     try {
-      const data =  await getAvatarUser()
-      setavatarUser(data)
+      const data =  await getUserSearch(queryParams)
+      setUsersSearch(data)
     } catch (error) {
       
     }
   }
 
-  return { GetUser, user, GetAvatarUser, avatarUser };
+  async function GetFollowers(id_followers){
+    try {
+      const id = getFollowers(id_followers)
+      return id
+    } catch (error) {
+      
+    }
+  }
+  return { GetUser, user, searchUser, usersSearch, GetFollowers };
 }

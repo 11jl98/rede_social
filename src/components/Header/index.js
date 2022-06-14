@@ -19,11 +19,10 @@ const statusBarHeight = StatusBar.currentHeight
 
 export default function Hearder() {
   const navigation = useNavigation();
-  const { GetUser, user, GetAvatarUser, avatarUser } = useContext(ContextUsers);
+  const { GetUser, user } = useContext(ContextUsers);
 
   useEffect(() => {
     GetUser()
-    GetAvatarUser()
   }, []);
 
   return (
@@ -33,7 +32,7 @@ export default function Hearder() {
           style={styles.buttonUser}
           onPress={() => navigation.navigate("Profile")}
         >
-          <Image source={{uri:`data:image/jpeg;base64,${avatarUser}`}} style={styles.avatarUser}/>
+          <Image source={{uri:user.avatar_url}} style={styles.avatarUser}/>
         </TouchableOpacity>
         <Text style={styles.username}>{user.name_user}</Text>
       </View>
