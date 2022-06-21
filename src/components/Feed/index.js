@@ -1,25 +1,48 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useContext, useEffect } from "react";
 import { AntDesign, Feather } from "@expo/vector-icons";
-import { useNavigation } from '@react-navigation/native';
 
+import { ContextPosts } from '../../context/PostsContext'
 
-export default function Feed({ data }) {
+export default function ListFeed() {
+  const {  FindByPostsInFollowers, postsFindFollowers } = useContext(ContextPosts)
+  const navigation = useNavigation();
 
-  const navigation = useNavigation()
+  useEffect(()=>{
+
+    FindByPostsInFollowers()
+
+  },[])
+
+  return (
+      <FlatList
+        style={styles.list}
+        data={postsFindFollowers}
+        keyExtractor={(item) => String(item.id)}
+        showsVerticalScrollIndicator={false}
+        renderItem={({ item }) => <Feed data={item} navigation={navigation}/>}
+        onEndReached={FindByPostsInFollowers}
+        onEndReachedThreshold={0.1}
+      />
+  );
+}
+
+function Feed({ data }) {
 
   return (
     <View style={styles.container}>
       <View style={styles.ProfileData}>
         <View style={styles.content}>
-          <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
+          <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
             <Image
               source={{
-                uri: data.urlUser,
+                uri: data.avatar_url,
               }}
               style={styles.userAvatar}
             />
           </TouchableOpacity>
-          <Text style={styles.userName}>{data.userName}</Text>
+          <Text style={styles.userName}>{data.name_user}</Text>
         </View>
         <View>
           <TouchableOpacity>
@@ -33,7 +56,7 @@ export default function Feed({ data }) {
         </View>
       </View>
       <View style={styles.userPost}>
-        <Image style={styles.imagePost} source={{ uri: data.urlPost }} />
+        <Image style={styles.imagePost} source={{ uri: data.url_file }} />
         <View style={styles.content}>
           <TouchableOpacity style={styles.iconsPost}>
             <AntDesign name="hearto" size={24} color="#171C26" />
@@ -43,14 +66,16 @@ export default function Feed({ data }) {
           </TouchableOpacity>
         </View>
         <View style={styles.content}>
-          <Text style={styles.userDescription}>{data.userName}:</Text>
-          <Text style={styles.description}>{data.descriptionPost}</Text>
+          <Text style={styles.userDescription}>{data.name_user}:</Text>
+          <Text style={styles.description}>{data.description}</Text>
         </View>
       </View>
       <Text style={styles.datePost}>{data.datePost}</Text>
     </View>
   );
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -120,4 +145,11 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     color: "#bfbfbf",
   },
+
+  list: {
+    fontSize: 18,
+    paddingStart: 10,
+    paddingTop: 14,
+  }
+
 });
