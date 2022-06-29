@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, FlatList, ScrollView } from "react-native";
 import Header from "../../components/Header";
 import Feed from "../../components/Feed";
+// import Comments from "../../components/Comments";
 import { UsersProvider } from "../../context/UsersContext";
 import { PostsProvider } from "../../context/PostsContext";
 

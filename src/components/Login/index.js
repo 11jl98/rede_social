@@ -9,7 +9,7 @@ import { useContext } from "react";
 import * as Animatable from "react-native-animatable";
 import { ContextSingIn } from "../../context/SingInContext";
 
-export function LogIn() {
+export function LogIn({ navigation }) {
   const { setEmail, email, setPassword, password, login } =
     useContext(ContextSingIn);
 
@@ -46,7 +46,7 @@ export function LogIn() {
           <Text style={styles.buttonText} >Enviar</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.buttonSingOut}>
+        <TouchableOpacity style={styles.buttonSingOut} onPress={()=> navigation.navigate('Register')}>
           <Text style={styles.buttonTextSingOut}>
             Não é cadastrado? Clique aqui{" "}
           </Text>

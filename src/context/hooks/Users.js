@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { getUser, getUserSearch } from "../../services/Users";
 import { getFollowers } from '../../services/FollowersInFollowing'
 
@@ -11,8 +11,10 @@ export default function UseSingIn() {
     url_capa: "",
     description: "",
     password: "",
+    passwordRepeat: ""
   };
   const [user, setUser] = useState(entityUser);
+  const [userSave, setUserSave] = useState(entityUser);
   const [usersSearch, setUsersSearch] = useState([]);
 
   async function GetUser() {
@@ -40,5 +42,5 @@ export default function UseSingIn() {
       
     }
   }
-  return { GetUser, user, searchUser, usersSearch, GetFollowers };
+  return { GetUser, user, searchUser, usersSearch, GetFollowers, userSave, setUserSave};
 }

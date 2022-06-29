@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#009393",
     alignItems: "center",
     justifyContent: "center",
+    paddingTop: 50
   },
   input: {
     width: "85%",

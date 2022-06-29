@@ -3,6 +3,8 @@ import Profile from "./pages/Profile";
 import Welcome from "./pages/Welcome";
 import SingIn from "./pages/SingIn";
 import Search from "./pages/Search";
+import Register from "./pages/Register";
+import Camera from "./pages/Camera";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
@@ -79,6 +81,8 @@ export default function MyStack(){
     <Stack.Navigator>
       <Stack.Screen name="Welcome" component={Welcome} options={{headerShown: false}}/>
       <Stack.Screen name="SingIn" component={SingIn} options={{headerShown: false}}/>
+      <Stack.Screen name="Register" component={Register} options={{headerShown: false}}/>
+      <Stack.Screen name="Camera" component={Camera} options={{headerShown: false}}/>
       <Stack.Screen name="Home" component={Routes} options={{headerShown: false}}/>
     </Stack.Navigator>
   )
