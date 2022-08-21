@@ -12,6 +12,7 @@ export default function UseSingIn() {
     try{
       
       const token = await Login({ email: email, password: password });
+      console.log('token', token);
       if (!token) return alert("Usuario não encontrado");
   
   
